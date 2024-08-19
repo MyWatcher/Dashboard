@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
+import {Link, NavLink} from 'react-router-dom';
 import transparentLogo from "assets/images/trasnparentLogo.png"
 import routesSideBar from "routesSideBar";
 import routesSideBarAdmin from "routesSideBarAdmin";
-import { LightMode } from '@mui/icons-material';
 
 const SideBar = () => {
   const [lightMode, setLightMode] = useState(() => {
@@ -26,7 +25,7 @@ const SideBar = () => {
           <Logo src={transparentLogo} alt="Logo" />
           <LogoText lightMode={lightMode}>OWL</LogoText>
         </LogoContainer>
-        
+
         <Section>
           {routesSideBar.map((route) => (
             <StyledNavLink key={route.key} to={route.route}>
@@ -36,9 +35,9 @@ const SideBar = () => {
             </StyledNavLink>
           ))}
         </Section>
-        
+
         <Divider />
-        
+
         <Section>
           {routesSideBarAdmin.map((route) => (
             <StyledNavLink key={route.key} to={route.route}>
@@ -48,17 +47,18 @@ const SideBar = () => {
           ))}
         </Section>
       </TopSection>
-      
+
       <BottomSection>
         <SwitchContainer lightMode={lightMode}>
           <label htmlFor="lightModeSwitch">Light Mode</label>
           <Switch id="lightModeSwitch" type="checkbox" checked={lightMode} onChange={handleToggleLightMode} />
         </SwitchContainer>
+        <a style={{color: lightMode ? "#031C30" : "#EFF2F4"}} href={"/owl.apk"} download="owl.apk">Download</a>
         <StyledNavLink lightMode={lightMode} to="/authentication/sign-out">
           <LogoutText lightMode={lightMode}>Logout</LogoutText>
         </StyledNavLink>
       </BottomSection>
-    </SideBarContainer> 
+    </SideBarContainer>
   );
 };
 
