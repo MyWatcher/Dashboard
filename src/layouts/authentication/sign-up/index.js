@@ -59,7 +59,7 @@ function Cover() {
 
     try {
       const response = await axios.post(
-        "http://20.199.106.94/api/auth/register",
+        "/api/api/auth/register",
         requestBody,
         {
           headers: {

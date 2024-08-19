@@ -89,7 +89,7 @@ function Overview() {
       } else {
           try {
             const response = await axios.get(
-            "http://20.199.106.94/api/user/account", {
+            "/api/api/user/account", {
               headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${localStorage.getItem("authToken")}`
@@ -101,7 +101,7 @@ function Overview() {
           } else {
             console.error("Retrieve info user failed.");
           }
-          const updatedUser = {...user, 
+          const updatedUser = {...user,
             height: 0,
             subscription: undefined,
             weight: 0,
@@ -132,7 +132,7 @@ function Overview() {
   const getSubscriptionInformation = async () => {
     try {
       const response = await axios.get(
-        "http://20.199.106.94/api/subscriptions/getSubscription",
+        "/api/api/subscriptions/getSubscription",
         {
           headers : {
             "Content-Type": "application/json",

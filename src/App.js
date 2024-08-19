@@ -103,7 +103,7 @@ export default function App() {
     const getUserInfo = async () => {
       try {
         const response = await axios.get(
-          "http://20.199.106.94/api/user/account", {
+          "/api/api/user/account", {
             headers: {
               "Content-Type": "application/json",
               "Authorization": `Bearer ${localStorage.getItem("authToken")}`
@@ -134,7 +134,7 @@ export default function App() {
     }
 
   }, []);
- 
+
   // Setting page scroll to 0 when changing the route
   useEffect(() => {
     document.documentElement.scrollTop = 0;
@@ -190,7 +190,7 @@ export default function App() {
             <SideBar/>
             {/* <Sidenav
               color={sidenavColor}
-              brand={(transparentSidenav && !darkMode) || whiteSidenav ? logo : logo} 
+              brand={(transparentSidenav && !darkMode) || whiteSidenav ? logo : logo}
               brandName="Material Dashboard 2"
               routes={routes}
               onMouseEnter={handleOnMouseEnter}

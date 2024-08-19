@@ -39,7 +39,7 @@ function PlatformSettings() {
     newEmail : "",
     password : "",
   });
-  
+
   const handleOpenModal = () => setOpenModal(true);
 
   const handleOpenModalDeleteAccount = async () => {
@@ -47,7 +47,7 @@ function PlatformSettings() {
     try {
 
       const responseDeletePhrase = await axios.post(
-        "http://20.199.106.94/api/auth/generate-delete-phrase",
+        "/api/api/auth/generate-delete-phrase",
       {},
       {
         headers : {
@@ -74,7 +74,7 @@ function PlatformSettings() {
 
   const handleOpenModalDeletePassword = () => setOpenModalDeletePassword(true);
   const handleCloseModalDeletePassword = () => setOpenModalDeletePassword(false);
-  
+
   const handleCloseModal = () => {
     setNewMailData({
       email : "",
@@ -113,7 +113,7 @@ function PlatformSettings() {
 
     try {
       const response = await axios.delete(
-        "http://20.199.106.94/api/auth/confirm-delete-account/" + deletePhrase,
+        "/api/api/auth/confirm-delete-account/" + deletePhrase,
         {
           headers: {
             accept : "application/json",
@@ -155,7 +155,7 @@ function PlatformSettings() {
     // }
     try {
       const response = await axios.put(
-        "http://20.199.106.94/api/user/account/email",
+        "/api/api/user/account/email",
         {
           newEmail : newMailData.newEmail,
         },
@@ -198,7 +198,7 @@ function PlatformSettings() {
     }
     try {
       const response = await axios.put(
-        "http://20.199.106.94/api/auth/change-password",
+        "/api/api/auth/change-password",
         {
           password : changePasswordData.newPassword,
         },
@@ -218,7 +218,7 @@ function PlatformSettings() {
       toast.error("Change password failed.")
       }
   }
-  
+
   return (
     <Card sx={{ boxShadow: "none" }}>
       <MDBox p={2}>

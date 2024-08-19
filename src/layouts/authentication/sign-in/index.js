@@ -61,7 +61,7 @@ function Basic() {
 
     try {
       const response = await axios.post(
-        "http://20.199.106.94" + "/api/auth/login",
+        "/api" + "/api/auth/login",
         formData,
         {
           headers: {
@@ -134,7 +134,7 @@ function Basic() {
   const getUserInfo = async () => {
     try {
       const response = await axios.get(
-        "http://20.199.106.94/api/user/account", {
+        "/api/api/user/account", {
           headers: {
             "Content-Type": "application/json",
             "Authorization": `Bearer ${localStorage.getItem("authToken")}`
@@ -143,7 +143,7 @@ function Basic() {
       )
       if (response.status === 200) {
         console.log("Retrieve info user successful!");
-        const updatedUser = {...user, 
+        const updatedUser = {...user,
           height: 0,
           subscription: undefined,
           weight: 0,
