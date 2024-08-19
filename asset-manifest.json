@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/Dashboard/static/css/main.e56499a3.css",
+    "main.js": "/Dashboard/static/js/main.cc1ff3ce.js",
+    "static/media/moodboardBis.png": "/Dashboard/static/media/moodboardBis.a167e9fa9fe68164c19a.png",
+    "static/media/home-decor-3.jpg": "/Dashboard/static/media/home-decor-3.74d13fcbd3c631fc7908.jpg",
+    "static/media/home-decor-2.jpg": "/Dashboard/static/media/home-decor-2.b4e5397c9846645ba275.jpg",
+    "static/media/home-decor-1.jpg": "/Dashboard/static/media/home-decor-1.05e218fd495ccc65c99d.jpg",
+    "static/media/home-decor-4.jpeg": "/Dashboard/static/media/home-decor-4.5b448fd339a14695f6aa.jpeg",
+    "static/media/background-signin-signup.jpg": "/Dashboard/static/media/background-signin-signup.d7eaff1a694af4464bd1.jpg",
+    "static/media/trasnparentLogo.png": "/Dashboard/static/media/trasnparentLogo.376afeba8bbdddeef97e.png",
+    "static/media/team-1.jpg": "/Dashboard/static/media/team-1.0fd36e0ee93dcfacdef8.jpg",
+    "static/media/team-2.jpg": "/Dashboard/static/media/team-2.13ae2ce3e12f4cfed420.jpg",
+    "static/media/team-3.jpg": "/Dashboard/static/media/team-3.0ef0be95e6850814c79e.jpg",
+    "static/media/icon.png": "/Dashboard/static/media/icon.9d455f56707f05518536.png",
+    "static/media/team-4.jpg": "/Dashboard/static/media/team-4.85c82b6e60178804017f.jpg",
+    "static/media/logo-slack.svg": "/Dashboard/static/media/logo-slack.7c47c5aa474b5c4fb39fcf05ffb8e4e7.svg",
+    "static/media/logo-xd.svg": "/Dashboard/static/media/logo-xd.6e37886f94dba0c2967ece68a152e30c.svg",
+    "static/media/logo-invision.svg": "/Dashboard/static/media/logo-invision.a1062115730dcd10e1c4f4abe7b9ab33.svg",
+    "static/media/logo-spotify.svg": "/Dashboard/static/media/logo-spotify.e83cf56c9d99a1fdf59e8deb58bbe470.svg",
+    "static/media/logo-jira.svg": "/Dashboard/static/media/logo-jira.c19fd4e416babfbd0fdb0a794188c601.svg",
+    "static/media/logo-atlassian.svg": "/Dashboard/static/media/logo-atlassian.f2b0e8570a4b4ce768854ff3dad1a6e1.svg",
+    "index.html": "/Dashboard/index.html"
+  },
+  "entrypoints": [
+    "static/css/main.e56499a3.css",
+    "static/js/main.cc1ff3ce.js"
+  ]
+}
