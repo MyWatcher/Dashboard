@@ -14,7 +14,8 @@ import Icon from "@mui/material/Icon";
 import MDBox from "components/MDBox";
 
 // Material Dashboard 2 React example components
-import Sidenav from "examples/Sidenav";
+// import Sidenav from "examples/Sidenav";
+import SideBar from "examples/Sidenav/SideNavNew";
 import Configurator from "examples/Configurator";
 
 // Material Dashboard 2 React themes
@@ -39,6 +40,7 @@ import { useMaterialUIController, setMiniSidenav, setOpenConfigurator } from "co
 // Images
 import brandWhite from "assets/images/logo-ct.png";
 import brandDark from "assets/images/logo-ct-dark.png";
+import logo from "assets/images/trasnparentLogo.png"
 import Basic from "layouts/authentication/sign-in";
 import { element } from "prop-types";
 import { UserProvider } from './assets/UserInformation/UserContext';
@@ -185,14 +187,15 @@ export default function App() {
         <CssBaseline />
         {layout === "dashboard" && (
           <>
-            <Sidenav
+            <SideBar/>
+            {/* <Sidenav
               color={sidenavColor}
-              brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
+              brand={(transparentSidenav && !darkMode) || whiteSidenav ? logo : logo} 
               brandName="Material Dashboard 2"
               routes={routes}
               onMouseEnter={handleOnMouseEnter}
               onMouseLeave={handleOnMouseLeave}
-            />
+            /> */}
             <Configurator />
             {configsButton}
           </>
@@ -211,14 +214,15 @@ export default function App() {
       <CssBaseline />
       {layout === "dashboard" && (
         <>
-          <Sidenav
+          <SideBar/>
+          {/* <Sidenav
             color={sidenavColor}
-            brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
+            brand={(transparentSidenav && !darkMode) || whiteSidenav ? logo : logo}
             brandName="OWL"
             routes={routes}
             onMouseEnter={handleOnMouseEnter}
             onMouseLeave={handleOnMouseLeave}
-          />
+          /> */}
           <Configurator />
           {configsButton}
         </>

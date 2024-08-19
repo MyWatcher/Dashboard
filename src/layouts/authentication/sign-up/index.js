@@ -6,8 +6,9 @@ import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 import MDInput from "components/MDInput";
 import MDButton from "components/MDButton";
-import CoverLayout from "layouts/authentication/components/CoverLayout";
-import bgImage from "assets/images/bg-sign-up-cover.jpeg";
+import styled from 'styled-components';
+import BasicLayout from "layouts/authentication/components/BasicLayout";
+import backgroundImage from "assets/images/background-signin-signup.jpg"
 
 function Cover() {
   const [formData, setFormData] = useState({
@@ -86,82 +87,61 @@ function Cover() {
   };
 
   return (
-    <CoverLayout image={bgImage}>
-      <Card>
-        <MDBox pt={4} pb={3} px={3}>
-          <MDTypography variant="h4" fontWeight="medium" mt={1} mb={1}>
-            Registration
-          </MDTypography>
-          <MDBox component="form" role="form">
-            <MDBox mb={2}>
-              <input
-                type="text"
-                name="firstName"
-                placeholder="First Name"
-                value={formData.firstName}
-                onChange={handleInputChange}
-                style={{ width: "100%", padding: "8px", marginBottom: "8px" }}
-              />
-            </MDBox>
-            <MDBox mb={2}>
-              <input
-                type="text"
-                name="lastName"
-                placeholder="Last Name"
-                value={formData.lastName}
-                onChange={handleInputChange}
-                style={{ width: "100%", padding: "8px", marginBottom: "8px" }}
-              />
-            </MDBox>
-            <MDBox mb={2}>
-            <select id="gender" name="gender" disabled={!genderList.length}
-                value={formData.gender}
-                onChange={(e) => {
-                  const updatedFormData = {
-                    ...formData,
-                    gender : e.target.value
-                  };
-                  setFormData(updatedFormData);
-                }}
-                style={{ width: "100%", padding: "8px", marginBottom: "8px" }}>
-                <option defaultValue={"Men"} value="" disabled hidden={formData.gender !== ""}>Gender</option>
-                {genderList.length > 0 && genderList.map((gender, index) => (
-                  <option key={index} value={gender}>{gender}</option>
-                ))}
-            </select>
-
-            </MDBox>
-            <MDBox mb={2}>
-              <input
-                type="text"
-                name="email"
-                placeholder="Email"
-                value={formData.email}
-                onChange={handleInputChange}
-                style={{ width: "100%", padding: "8px", marginBottom: "8px" }}
-              />
-            </MDBox>
-            <MDBox mb={2}>
-              <input
-                type="password"
-                name="password"
-                placeholder="Password"
-                value={formData.password}
-                onChange={handleInputChange}
-                style={{ width: "100%", padding: "8px", marginBottom: "8px" }}
-              />
-            </MDBox>
-            <MDBox mb={2}>
-              <input
-                type="password"
-                name="confirmPassword"
-                placeholder="Confirm Password"
-                value={formData.confirmPassword}
-                onChange={handleInputChange}
-                style={{ width: "100%", padding: "8px", marginBottom: "8px" }}
-              />
-            </MDBox>
-            {success && (
+    <Container>
+      <Background src={backgroundImage} />
+      <LoginBox>
+        <Title>Registration</Title>
+        <StyledInput
+          type="text"
+          name="firstName"
+          placeholder="First Name"
+          value={formData.firstName}
+          onChange={handleInputChange}
+        />
+        <StyledInput
+        type="text"
+        name="lastName"
+        placeholder="Last Name"
+        value={formData.lastName}
+        onChange={handleInputChange}
+        />
+        <select id="gender" name="gender" disabled={!genderList.length}
+          value={formData.gender}
+            onChange={(e) => {
+              const updatedFormData = {
+                ...formData,
+                gender : e.target.value
+              };
+              setFormData(updatedFormData);
+              }}
+            style={{ width: "100%", padding: "8px", marginBottom: "8px", background: "#FFFFFF"}}>
+            <option defaultValue={"Men"} value="" disabled hidden={formData.gender !== ""}>Gender</option>
+            {genderList.length > 0 && genderList.map((gender, index) => (
+            <option key={index} value={gender}>{gender}</option>
+        ))}
+        </select>
+        <StyledInput
+        type="text"
+        name="email"
+        placeholder="Email"
+        value={formData.email}
+        onChange={handleInputChange}
+        />
+        <StyledInput
+        type="password"
+        name="password"
+        placeholder="Password"
+        value={formData.password}
+        onChange={handleInputChange}
+        />
+        <StyledInput
+        type="password"
+        name="confirmPassword"
+        placeholder="Confirm Password"
+        value={formData.confirmPassword}
+        onChange={handleInputChange}
+        />
+        {success && (
               <span
                 style={{
                   width: "100%",
@@ -195,25 +175,90 @@ function Cover() {
                 {error}
               </span>
             )}
-            <button
-              style={{
-                width: "100%",
-                borderRadius: "0.75rem",
-                padding: "1rem",
-                backgroundColor: "blue",
-                color: "white",
-                fontSize: "1.25rem",
-                cursor: "pointer",
-              }}
-              onClick={handleRegistration}
-            >
-              Sign in
-            </button>
-          </MDBox>
-        </MDBox>
-      </Card>
-    </CoverLayout>
+        <SignUpButton onClick={handleRegistration}>Sign Up</SignUpButton>
+        <Text>
+          <RegisterLink href="/register">Return to Login</RegisterLink>
+        </Text>
+      </LoginBox>
+    </Container>
   );
 }
 
 export default Cover;
+
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  position: relative;
+`;
+
+const Background = styled.img`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+`;
+
+const LoginBox = styled.div`
+  background: #031C30;
+  padding: 40px;
+  border-radius: 30px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 400px;
+  max-width: 90%;
+`;
+
+const Title = styled.h1`
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: white;
+`;
+
+const StyledInput = styled.input`
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  background-color: #042743;
+  color: white;
+
+  &::placeholder {
+    color: white;
+    opacity: 0.5;
+  }
+`;
+
+const SignUpButton = styled.button`
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  background-color: #FFDE59;
+  color: #031C30;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #e6c94f;
+  }
+`;
+
+const Text = styled.p`
+  font-size: 14px;
+  color: white;
+  margin-bottom: 20px;
+`;
+
+const RegisterLink = styled.a`
+  color: #FFDE59;
+  text-decoration: none;
+`;

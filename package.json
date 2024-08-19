@@ -32,6 +32,7 @@
     "react-table": "7.8.0",
     "react-toastify": "^10.0.5",
     "reactjs-popup": "^2.0.6",
+    "styled-components": "^6.1.12",
     "stylis": "4.1.4",
     "stylis-plugin-rtl": "2.1.1",
     "yup": "1.1.1"
@@ -45,7 +46,7 @@
     "eject": "react-scripts eject",
     "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start"
   },
-  "proxy" : "http://20.199.106.94",
+  "proxy": "http://20.199.106.94",
   "eslintConfig": {
     "extends": [
       "react-app",

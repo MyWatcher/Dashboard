@@ -1,17 +1,13 @@
 import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import Card from "@mui/material/Card";
-import MDBox from "components/MDBox";
-import MDInput from "components/MDInput";
-import MDButton from "components/MDButton";
-import BasicLayout from "layouts/authentication/components/BasicLayout";
-import bgImage from "assets/images/bg-sign-in-basic.jpeg";
+import styled from 'styled-components';
+import backgroundImage from "assets/images/background-signin-signup.jpg"
 import axios from "axios";
+import logo from "assets/images/trasnparentLogo.png"
 import {GoogleOAuthProvider, useGoogleLogin, useGoogleOAuth} from '@react-oauth/google'
 import GoogleIcon from "../../../assets/images/icons/GoogleIcone/GoogleIcone"
 import ErrorHandler from '../../ErrorHandling/ErrorHandling'
 import { useUser } from "../../../assets/UserInformation/UserContext";
-import { token } from "stylis";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -30,13 +26,6 @@ function Basic() {
   const notificationShownRef = useRef(false)
   const [rememberMe, setRememberMe] = useState(false);
 
-
-  const [userInfo, setUserInfo] = useState([]);
-  const [profileInfo, setProfileInfo] = useState([]);
-
-  const handleRememberMeChange = (event) => {
-    setRememberMe(event.target.checked);
-  };
 
   useEffect(() => {
     const justRegistered = searchParams.get("justRegistered");
@@ -184,103 +173,216 @@ function Basic() {
     }
   }
 
-  return (
-    <BasicLayout image={bgImage}>
-      <Card>
-        <MDBox pt={4} pb={3} px={3}>
-          <MDButton
-              type="submit"
-              variant="gradient"
-              color="info"
-              fullWidth
-              onClick={login}
-              endIcon={<GoogleIcon/>}>
-            Sign in
-          </MDButton>
-        </MDBox>
-        <hr/>
-        <MDBox pt={4} pb={3} px={3}>
-          <MDBox component="form" role="form" onSubmit={handleLogin}>
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
-            <MDBox mb={2}>
-              <MDInput
-                  type="email"
-                  label="Email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  fullWidth
-              />
-            </MDBox>
-            <MDBox mb={2}>
-              <MDInput
-                  type="password"
-                  label="Password"
-                  name="password"
-                  value={formData.password}
-                  onChange={handleInputChange}
-                  fullWidth
-              />
-            </MDBox>
-            {success && (
-                <span
-                    style={{
-                      width: "100%",
-                      display: "inline-block",
-                      borderRadius: "0.75rem",
-                      padding: "0.25rem",
-                      backgroundColor: "green",
-                      color: "white",
-                      textAlign: "center",
-                      fontSize: "1.25rem",
-                      marginBottom: 16,
-                    }}
-                >
-                {success}
-              </span>
-            )}
-            {error && (
-                <span
-                    style={{
-                      width: "100%",
-                      display: "inline-block",
-                      borderRadius: "0.75rem",
-                      padding: "0.25rem",
-                      backgroundColor: "red",
-                      color: "white",
-                      textAlign: "center",
-                      fontSize: "1.25rem",
-                      marginBottom: 16,
-                    }}
-                >
-                {error}
-                  <ErrorHandler message={error}/>
-              </span>
-            )}
-          
-            <MDBox mt={4} mb={1}>
-            {/*<FormControlLabel
-                control={
-                  <Switch
-                    checked={rememberMe}
-                    onChange={handleRememberMeChange}
-                    name="rememberMe"
-                    color="primary"
-                  />
-                }
-                label="Remember Me"
-              />*/}
-              <MDButton type="submit" variant="gradient" color="info" fullWidth>
-                Sign in
-              </MDButton>
-            </MDBox>
-            {/* ... Other components ... */}
-          </MDBox>
-        </MDBox>
-      </Card>
-      <ToastContainer/>
-    </BasicLayout>
+  return (
+    <Container>
+      <Background src={backgroundImage} />
+      <LoginBox>
+        <Image src={logo} />
+        <StyledInput
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={formData.email}
+          onChange={handleInputChange}
+        />
+        <PasswordContainer>
+          <StyledInput
+            type={passwordVisible ? 'text' : 'password'}
+            name="password"
+            placeholder="Password"
+            value={formData.password}
+            onChange={handleInputChange}
+          />
+          <ToggleButton onClick={() => setPasswordVisible(!passwordVisible)}>
+            {passwordVisible ? 'Hide' : 'Show'}
+          </ToggleButton>
+        </PasswordContainer>
+        {success && (
+              <span
+                  style={{
+                    width: "100%",
+                    display: "inline-block",
+                    borderRadius: "0.75rem",
+                    padding: "0.25rem",
+                    backgroundColor: "green",
+                    color: "white",
+                    textAlign: "center",
+                    fontSize: "1.25rem",
+                    marginBottom: 16,
+                  }}
+              >
+              {success}
+            </span>
+          )}
+          {error && (
+              <span
+                  style={{
+                    width: "100%",
+                    display: "inline-block",
+                    borderRadius: "0.75rem",
+                    padding: "0.25rem",
+                    backgroundColor: "red",
+                    color: "white",
+                    textAlign: "center",
+                    fontSize: "1.25rem",
+                    marginBottom: 16,
+                  }}
+              >
+              {error}
+                <ErrorHandler message={error}/>
+            </span>
+          )}
+        <SignUpButton onClick={handleLogin}>Login</SignUpButton>
+        <Text>
+          Don’t have an account yet? <RegisterLink href="/authentication/sign-up">Register for free</RegisterLink>
+        </Text>
+        <Divider>
+          <Line />
+          <OrText>or</OrText>
+          <Line />
+        </Divider>
+        <GoogleButton onClick={login}>
+          <GoogleIcon /> Sign in with Google
+        </GoogleButton>
+      </LoginBox>
+    </Container>
   );
 }
 
 export default Basic;
+
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  position: relative;
+`;
+
+const Background = styled.img`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+`;
+
+const LoginBox = styled.div`
+  background: #031C30;
+  padding: 40px;
+  border-radius: 30px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 400px;
+  max-width: 90%;
+`;
+
+const Image = styled.img`
+  width: 113px;
+  height: 76px;
+  margin-bottom: 20px;
+`;
+
+const Title = styled.h1`
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: white;
+`;
+
+const StyledInput = styled.input`
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  background-color: #042743;
+  color: white;
+
+  &::placeholder {
+    color: white;
+    opacity: 0.5;
+  }
+`;
+
+const PasswordContainer = styled.div`
+  position: relative;
+  width: 100%;
+`;
+
+const ToggleButton = styled.button`
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  color: #007bff;
+`;
+
+const SignUpButton = styled.button`
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  background-color: #FFDE59;
+  color: #031C30;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #e6c94f;
+  }
+`;
+
+const Text = styled.p`
+  font-size: 14px;
+  color: white;
+  margin-bottom: 20px;
+`;
+
+const RegisterLink = styled.a`
+  color: #FFDE59;
+  text-decoration: none;
+`;
+
+const Divider = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+`;
+
+const Line = styled.div`
+  flex: 1;
+  height: 1px;
+  background-color: yellow;
+`;
+
+const OrText = styled.span`
+  margin: 0 10px;
+  font-size: 14px;
+  color: white;
+`;
+
+const GoogleButton = styled.button`
+  display: flex;
+  align-items: center;
+  background-color: #F5F5F5;
+  color: #4285f4;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  gap: 10px;
+
+  &:hover {
+    background-color: #e0e0e0;
+  }
+`;
