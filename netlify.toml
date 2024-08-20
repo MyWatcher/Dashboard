@@ -1,4 +1,5 @@
 [[redirects]]
-    from = "/api/api/auth/login"
-    to = "http://20.199.106.94/api/auth/login"
+    from = "/api/*"
+    to = "http://20.199.106.94/api/:splat"
     status = 200
+    force = true

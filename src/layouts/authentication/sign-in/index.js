@@ -61,7 +61,7 @@ function Basic() {
 
     try {
       const response = await axios.post(
-        "http://20.199.106.94/api/auth/login",
+        "/api/api/auth/login",
         formData,
         {
           headers: {
