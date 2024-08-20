@@ -5,7 +5,37 @@
     force = true
 
 [[redirects]]
+    from = "/api/api/auth/register"
+    to = "http://20.199.106.94/api/auth/register"
+    status = 201
+    force = true
+
+[[redirects]]
+    from = "/api/api/auth/generate-delete-phrase"
+    to = "http://20.199.106.94/api/auth/generate-delete-phrase"
+    status = 201
+    force = true
+
+[[redirects]]
+    from = "/api/api/auth/change-password"
+    to = "http://20.199.106.94/api/auth/change-password"
+    status = 200
+    force = true
+
+[[redirects]]
     from = "/api/api/user/account"
     to = "http://20.199.106.94/api/user/account"
+    status = 200
+    force = true
+
+[[redirects]]
+    from = "/api/api/user/account/email"
+    to = "http://20.199.106.94/api/user/account/email"
+    status = 200
+    force = true
+
+[[redirects]]
+    from = "/api/api/subscriptions/getSubscription"
+    to = "http://20.199.106.94/api/subscriptions/getSubscription"
     status = 200
     force = true
