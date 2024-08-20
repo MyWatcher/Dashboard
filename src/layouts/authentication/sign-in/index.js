@@ -61,7 +61,7 @@ function Basic() {
 
     try {
       const response = await axios.post(
-        "/api" + "/api/auth/login",
+        "/api/api/auth/login",
         formData,
         {
           headers: {

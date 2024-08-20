@@ -1,0 +1,4 @@
+[[redirects]]
+    from = "/api/api/auth/login"
+    to = "http://20.199.106.94/api/auth/login"
+    status = 200
