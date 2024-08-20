@@ -1,1 +1,2 @@
 /api/api/auth/login http://20.199.106.94/api/auth/login 201
+/api/api/user/account http://20.199.106.94/api/user/account 200

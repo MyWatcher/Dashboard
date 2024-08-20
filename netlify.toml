@@ -3,3 +3,9 @@
     to = "http://20.199.106.94/api/auth/login"
     status = 201
     force = true
+
+[[redirects]]
+    from = "/api/api/user/account"
+    to = "http://20.199.106.94/api/user/account"
+    status = 200
+    force = true
