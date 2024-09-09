@@ -126,7 +126,6 @@ function TeamPage() {
         body,
         config
       );
-      console.log("response", response);
       setTeamName("");
       setTeamDescription("");
       fetchTeams();
@@ -137,11 +136,23 @@ function TeamPage() {
   };
 
   const handleDeleteTeam = async (teamId) => {
-    await axios.delete(`/api/teams/${teamId}`);
-    fetchTeams();
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+      },
+    };
+    try {
+      const response = await axios.delete(
+        `http://20.199.106.94/api/team/deleteTeam/${teamId}`,
+        config
+      );
+      console.log("response", response);
+      fetchTeams();
+    } catch (error) {
+      console.error(error);
+    }
   };
-
-  console.log("authToken", localStorage.getItem("authToken"));
 
   return (
     <DashboardLayout>
