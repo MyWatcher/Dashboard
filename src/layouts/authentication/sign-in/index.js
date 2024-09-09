@@ -1,17 +1,21 @@
 import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import styled from 'styled-components';
-import backgroundImage from "assets/images/background-signin-signup.jpg"
+import styled from "styled-components";
+import backgroundImage from "assets/images/background-signin-signup.jpg";
 import axios from "axios";
-import logo from "assets/images/trasnparentLogo.png"
-import {GoogleOAuthProvider, useGoogleLogin, useGoogleOAuth} from '@react-oauth/google'
-import GoogleIcon from "../../../assets/images/icons/GoogleIcone/GoogleIcone"
-import ErrorHandler from '../../ErrorHandling/ErrorHandling'
+import logo from "assets/images/trasnparentLogo.png";
+import {
+  GoogleOAuthProvider,
+  useGoogleLogin,
+  useGoogleOAuth,
+} from "@react-oauth/google";
+import GoogleIcon from "../../../assets/images/icons/GoogleIcone/GoogleIcone";
+import ErrorHandler from "../../ErrorHandling/ErrorHandling";
 import { useUser } from "../../../assets/UserInformation/UserContext";
 import { toast, ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
+import "react-toastify/dist/ReactToastify.css";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Switch from "@mui/material/Switch";
 
 function Basic() {
   const [formData, setFormData] = useState({
@@ -21,25 +25,26 @@ function Basic() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const navigate = useNavigate();
-  const {user, updateUser} = useUser();
+  const { user, updateUser } = useUser();
   const searchParams = new URLSearchParams(window.location.search);
-  const notificationShownRef = useRef(false)
+  const notificationShownRef = useRef(false);
   const [rememberMe, setRememberMe] = useState(false);
-
 
   useEffect(() => {
     const justRegistered = searchParams.get("justRegistered");
     const emailChanged = searchParams.get("emailChanged");
     const accountDeleted = searchParams.get("accountDeleted");
     if (emailChanged === "true") {
-      toast.success("You must confirm your email before connecting.")
+      toast.success("You must confirm your email before connecting.");
     }
     if (justRegistered === "true" && !notificationShownRef.current) {
-      toast.success("User registered, confirm your email address to activate your account.")
-      notificationShownRef.current = true
+      toast.success(
+        "User registered, confirm your email address to activate your account."
+      );
+      notificationShownRef.current = true;
     }
     if (accountDeleted === "true") {
-      toast.success("Account deleted successfully.")
+      toast.success("Account deleted successfully.");
     }
   }, [searchParams]);
 
@@ -61,7 +66,7 @@ function Basic() {
 
     try {
       const response = await axios.post(
-        "/api/api/auth/login",
+        "http://20.199.106.94/api/auth/login",
         formData,
         {
           headers: {
@@ -71,7 +76,10 @@ function Basic() {
       );
 
       setSuccess(response.data.message);
-      if (response.status === 200 || response.data.message === "Login success") {
+      if (
+        response.status === 200 ||
+        response.data.message === "Login success"
+      ) {
         console.log("Login successful!");
       } else {
         console.error("Login failed.");
@@ -98,52 +106,55 @@ function Basic() {
       console.log("result => ", JSON.stringify(response));
       localStorage.setItem("authToken", response.access_token);
       getUserInfoGoogle(response.access_token);
-      navigate("/")
-     },
-    onError: (error) => console.log(`Login Failed: ${error}`, )
+      navigate("/");
+    },
+    onError: (error) => console.log(`Login Failed: ${error}`),
   });
 
   const getUserInfoGoogle = async (token) => {
     try {
-      const response = await axios.get("https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=" + token)
+      const response = await axios.get(
+        "https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=" +
+          token
+      );
       console.log(response.data.email);
-      const updatedUser = {...user,
-        height : 0,
-        subscription : undefined,
-        weight : 0,
-        birthDate : "",
+      const updatedUser = {
+        ...user,
+        height: 0,
+        subscription: undefined,
+        weight: 0,
+        birthDate: "",
         createdAt: new Date(),
-        email : response.data.email,
-        firstName : response.data.given_name,
-        gender : "",
-        lastName : response.data.family_name,
+        email: response.data.email,
+        firstName: response.data.given_name,
+        gender: "",
+        lastName: response.data.family_name,
         password: "",
-        updatedAt : "",
-        stripeCustomerId : "",
-        userId : response.data.id,
-        token : token,
-        tokens : 0,
-        heartRate : [],
-      }
+        updatedAt: "",
+        stripeCustomerId: "",
+        userId: response.data.id,
+        token: token,
+        tokens: 0,
+        heartRate: [],
+      };
       updateUser(updatedUser);
     } catch (error) {
       console.error("Failed to fetch user info:", error);
     }
-  }
+  };
 
   const getUserInfo = async () => {
     try {
-      const response = await axios.get(
-        "/api/api/user/account", {
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${localStorage.getItem("authToken")}`
-          }
+      const response = await axios.get("/api/api/user/account", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("authToken")}`,
         },
-      )
+      });
       if (response.status === 200) {
         console.log("Retrieve info user successful!");
-        const updatedUser = {...user,
+        const updatedUser = {
+          ...user,
           height: 0,
           subscription: undefined,
           weight: 0,
@@ -158,11 +169,11 @@ function Basic() {
           stripeCustomerId: response.data.stripeCustomerId,
           userId: response.data._id,
           token: localStorage.getItem("authToken"),
-          tokens : response.data.tokens,
-          heartRate : response.data.heartRate,
-        }
+          tokens: response.data.tokens,
+          heartRate: response.data.heartRate,
+        };
         updateUser(updatedUser);
-        console.log(updatedUser)
+        console.log(updatedUser);
         localStorage.removeItem("userData");
         localStorage.setItem("userData", JSON.stringify(response.data));
       } else {
@@ -171,7 +182,7 @@ function Basic() {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   const [passwordVisible, setPasswordVisible] = useState(false);
 
@@ -189,54 +200,57 @@ function Basic() {
         />
         <PasswordContainer>
           <StyledInput
-            type={passwordVisible ? 'text' : 'password'}
+            type={passwordVisible ? "text" : "password"}
             name="password"
             placeholder="Password"
             value={formData.password}
             onChange={handleInputChange}
           />
           <ToggleButton onClick={() => setPasswordVisible(!passwordVisible)}>
-            {passwordVisible ? 'Hide' : 'Show'}
+            {passwordVisible ? "Hide" : "Show"}
           </ToggleButton>
         </PasswordContainer>
         {success && (
-              <span
-                  style={{
-                    width: "100%",
-                    display: "inline-block",
-                    borderRadius: "0.75rem",
-                    padding: "0.25rem",
-                    backgroundColor: "green",
-                    color: "white",
-                    textAlign: "center",
-                    fontSize: "1.25rem",
-                    marginBottom: 16,
-                  }}
-              >
-              {success}
-            </span>
-          )}
-          {error && (
-              <span
-                  style={{
-                    width: "100%",
-                    display: "inline-block",
-                    borderRadius: "0.75rem",
-                    padding: "0.25rem",
-                    backgroundColor: "red",
-                    color: "white",
-                    textAlign: "center",
-                    fontSize: "1.25rem",
-                    marginBottom: 16,
-                  }}
-              >
-              {error}
-                <ErrorHandler message={error}/>
-            </span>
-          )}
+          <span
+            style={{
+              width: "100%",
+              display: "inline-block",
+              borderRadius: "0.75rem",
+              padding: "0.25rem",
+              backgroundColor: "green",
+              color: "white",
+              textAlign: "center",
+              fontSize: "1.25rem",
+              marginBottom: 16,
+            }}
+          >
+            {success}
+          </span>
+        )}
+        {error && (
+          <span
+            style={{
+              width: "100%",
+              display: "inline-block",
+              borderRadius: "0.75rem",
+              padding: "0.25rem",
+              backgroundColor: "red",
+              color: "white",
+              textAlign: "center",
+              fontSize: "1.25rem",
+              marginBottom: 16,
+            }}
+          >
+            {error}
+            <ErrorHandler message={error} />
+          </span>
+        )}
         <SignUpButton onClick={handleLogin}>Login</SignUpButton>
         <Text>
-          Don’t have an account yet? <RegisterLink href="/authentication/sign-up">Register for free</RegisterLink>
+          Don’t have an account yet?{" "}
+          <RegisterLink href="/authentication/sign-up">
+            Register for free
+          </RegisterLink>
         </Text>
         <Divider>
           <Line />
@@ -270,7 +284,7 @@ const Background = styled.img`
 `;
 
 const LoginBox = styled.div`
-  background: #031C30;
+  background: #031c30;
   padding: 40px;
   border-radius: 30px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -329,8 +343,8 @@ const SignUpButton = styled.button`
   width: 100%;
   padding: 10px;
   margin-bottom: 20px;
-  background-color: #FFDE59;
-  color: #031C30;
+  background-color: #ffde59;
+  color: #031c30;
   border: none;
   border-radius: 5px;
   font-size: 16px;
@@ -348,7 +362,7 @@ const Text = styled.p`
 `;
 
 const RegisterLink = styled.a`
-  color: #FFDE59;
+  color: #ffde59;
   text-decoration: none;
 `;
 
@@ -373,7 +387,7 @@ const OrText = styled.span`
 const GoogleButton = styled.button`
   display: flex;
   align-items: center;
-  background-color: #F5F5F5;
+  background-color: #f5f5f5;
   color: #4285f4;
   padding: 10px 20px;
   border: none;

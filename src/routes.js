@@ -1,4 +1,3 @@
-
 /** 
   All of the routes for the Material Dashboard 2 React are added here,
   You can add a new route, customize the routes and delete the routes here.
@@ -24,6 +23,7 @@
 // Material Dashboard 2 React layouts
 import Dashboard from "layouts/dashboard";
 import Profile from "layouts/profile";
+import Team from "layouts/team";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
 import SignOut from "layouts/authentication/sign-out";
@@ -34,7 +34,7 @@ import Icon from "@mui/material/Icon";
 const routes = [
   {
     type: "title",
-    title : "User information",
+    title: "User information",
   },
   {
     type: "collapse",
@@ -61,13 +61,29 @@ const routes = [
     component: <SignUp />,
   },
   {
-      type: "collapse",
-      name: "Profile",
-      key: "Profile",
-      icon: <Icon fontSize="small">Profile</Icon>,
-      route: "/profile",
-      component: <Profile />,
-    },
+    type: "collapse",
+    name: "Profile",
+    key: "Profile",
+    icon: <Icon fontSize="small">Profile</Icon>,
+    route: "/profile",
+    component: <Profile />,
+  },
+  {
+    type: "collapse",
+    name: "Document",
+    key: "Document",
+    icon: <Icon fontSize="small">article</Icon>,
+    route: "/document",
+    component: <Dashboard />,
+  },
+  {
+    type: "collapse",
+    name: "Team",
+    key: "Team",
+    icon: <Icon fontSize="small">people</Icon>,
+    route: "/team",
+    component: <Team />,
+  },
   {
     type: "divider",
   },
