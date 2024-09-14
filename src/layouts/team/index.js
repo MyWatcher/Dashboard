@@ -95,10 +95,7 @@ function TeamPage() {
       },
     };
     try {
-      const response = await axios.get(
-        "http://20.199.106.94/api/team/getMyTeams",
-        config
-      );
+      const response = await axios.get("/api/api/team/getMyTeams", config);
       console.log("response", response);
       setTeams(response.data);
     } catch (error) {
@@ -122,7 +119,7 @@ function TeamPage() {
     };
     try {
       const response = await axios.post(
-        "http://20.199.106.94/api/team/createTeam",
+        "/api/api/team/createTeam",
         body,
         config
       );
@@ -144,7 +141,7 @@ function TeamPage() {
     };
     try {
       const response = await axios.delete(
-        `http://20.199.106.94/api/team/deleteTeam/${teamId}`,
+        `/api/api/team/deleteTeam/${teamId}`,
         config
       );
       console.log("response", response);

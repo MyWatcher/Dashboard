@@ -65,15 +65,11 @@ function Basic() {
     }
 
     try {
-      const response = await axios.post(
-        "http://20.199.106.94/api/auth/login",
-        formData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await axios.post("/api/api/auth/login", formData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
       setSuccess(response.data.message);
       if (
