@@ -1,1 +1,10 @@
-/* /index.html 200
+/api/api/auth/login http://20.199.106.94/api/auth/login 201
+/api/api/auth/register http://20.199.106.94/api/auth/register 201
+/api/api/auth/generate-delete-phrase http://20.199.106.94/api/auth/generate-delete-phrase 201
+/api/api/auth/change-password http://20.199.106.94/api/auth/change-password 200
+/api/api/auth/confirm-delete-account/_ http://20.199.106.94/api/auth/confirm-delete-account/_ 200
+
+/api/api/user/account http://20.199.106.94/api/user/account 200
+/api/api/user/account/email http://20.199.106.94/api/account/email 200
+
+/api/api/subscriptions/getSubscription http://20.199.106.94/api/subscriptions/getSubscription 200
