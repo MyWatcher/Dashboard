@@ -1,7 +1,3 @@
-/*    /index.html   200
-
-https://dashboard-owl.netlify.app/dashboard http://localhost:3000/dashboard 200
-
 /api/api/auth/login http://20.199.106.94/api/auth/login 201
 /api/api/auth/register http://20.199.106.94/api/auth/register 201
 /api/api/auth/generate-delete-phrase http://20.199.106.94/api/auth/generate-delete-phrase 201
@@ -16,3 +12,5 @@ https://dashboard-owl.netlify.app/dashboard http://localhost:3000/dashboard 200
 /api/api/team/getMyTeams http://20.199.106.94/api/team/getMyTeams 200
 /api/api/team/createTeam http://20.199.106.94/api/team/createTeam 201
 /api/api/team/deleteTeam/_ http://20.199.106.94/api/team/deleteTeam/_ 200
+
+/*    /index.html   200
