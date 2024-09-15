@@ -8,3 +8,7 @@
 /api/api/user/account/email http://20.199.106.94/api/account/email 200
 
 /api/api/subscriptions/getSubscription http://20.199.106.94/api/subscriptions/getSubscription 200
+
+/api/api/team/getMyTeams http://20.199.106.94/api/team/getMyTeams 200
+/api/api/team/createTeam http://20.199.106.94/api/team/createTeam 201
+/api/api/team/deleteTeam/_ http://20.199.106.94/api/team/deleteTeam/_ 200
