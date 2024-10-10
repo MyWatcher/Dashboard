@@ -128,9 +128,12 @@ export default function App() {
           localStorage.removeItem("authToken");
           localStorage.removeItem("userData");
         }
-        if (!isAuthenticatedOnLoad) {
+        if (
+          !isAuthenticatedOnLoad &&
+          window.location.pathname === "/dashboard"
+        ) {
           // User is not authenticated, redirect to login page
-          // navigate("/authentication/sign-in", { replace: true });
+          navigate("/authentication/sign-in", { replace: true });
         }
       } catch (error) {
         console.log(error);
@@ -138,7 +141,8 @@ export default function App() {
     };
     if (isAuthenticatedOnLoad) getUserInfo();
     else {
-      // navigate("/authentication/sign-in", { replace: true });
+      window.location.pathname === "/dashboard" &&
+        navigate("/authentication/sign-in", { replace: true });
     }
   }, []);
 
