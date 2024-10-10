@@ -248,14 +248,14 @@ function Basic() {
             Register for free
           </RegisterLink>
         </Text>
-        <Divider>
-          <Line />
-          <OrText>or</OrText>
-          <Line />
-        </Divider>
-        <GoogleButton onClick={login}>
-          <GoogleIcon /> Sign in with Google
-        </GoogleButton>
+        {/*<Divider>*/}
+        {/*  <Line />*/}
+        {/*<OrText>or</OrText>*/}
+        {/*<Line />*/}
+        {/*</Divider>*/}
+        {/*<GoogleButton onClick={login}>*/}
+        {/*  <GoogleIcon /> Sign in with Google*/}
+        {/*</GoogleButton>*/}
       </LoginBox>
     </Container>
   );

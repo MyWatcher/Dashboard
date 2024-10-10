@@ -1,9 +1,15 @@
-import { GoogleOAuthProvider } from '@react-oauth/google';
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 import { useState, useEffect, useMemo } from "react";
 
 // react-router components
-import { Routes, Route, Navigate, useLocation, useNavigate } from "react-router-dom";
+import {
+  Routes,
+  Route,
+  Navigate,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 
 // @mui material components
 import { ThemeProvider } from "@mui/material/styles";
@@ -35,16 +41,20 @@ import createCache from "@emotion/cache";
 import routes from "routes";
 
 // Material Dashboard 2 React contexts
-import { useMaterialUIController, setMiniSidenav, setOpenConfigurator } from "context";
+import {
+  useMaterialUIController,
+  setMiniSidenav,
+  setOpenConfigurator,
+} from "context";
 
 // Images
 import brandWhite from "assets/images/logo-ct.png";
 import brandDark from "assets/images/logo-ct-dark.png";
-import logo from "assets/images/trasnparentLogo.png"
+import logo from "assets/images/trasnparentLogo.png";
 import Basic from "layouts/authentication/sign-in";
 import { element } from "prop-types";
-import { UserProvider } from './assets/UserInformation/UserContext';
-import axios from 'axios';
+import { UserProvider } from "./assets/UserInformation/UserContext";
+import axios from "axios";
 
 export default function App() {
   const [controller, dispatch] = useMaterialUIController();
@@ -89,27 +99,26 @@ export default function App() {
   };
   const navigate = useNavigate();
   // auth redirect to login
-  const isAuthenticated = !!localStorage.getItem('authToken');
+  const isAuthenticated = !!localStorage.getItem("authToken");
   // Change the openConfigurator state
-  const handleConfiguratorOpen = () => setOpenConfigurator(dispatch, !openConfigurator);
+  const handleConfiguratorOpen = () =>
+    setOpenConfigurator(dispatch, !openConfigurator);
 
   // Setting the dir attribute for the body element
   useEffect(() => {
-    const rememberUser = localStorage.getItem('rememberUser') === "true";
-    const isAuthenticatedOnLoad = !!localStorage.getItem('authToken');
+    const rememberUser = localStorage.getItem("rememberUser") === "true";
+    const isAuthenticatedOnLoad = !!localStorage.getItem("authToken");
     document.body.setAttribute("dir", direction);
-    console.log("isAuthenticatedOnLoad: ", isAuthenticatedOnLoad)
+    console.log("isAuthenticatedOnLoad: ", isAuthenticatedOnLoad);
 
     const getUserInfo = async () => {
       try {
-        const response = await axios.get(
-          "/api/api/user/account", {
-            headers: {
-              "Content-Type": "application/json",
-              "Authorization": `Bearer ${localStorage.getItem("authToken")}`
-            }
+        const response = await axios.get("/api/api/user/account", {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("authToken")}`,
           },
-        )
+        });
         if (response.status === 200) {
           console.log("Retrieve info user successful!");
           const userData = response.data;
@@ -121,18 +130,16 @@ export default function App() {
         }
         if (!isAuthenticatedOnLoad) {
           // User is not authenticated, redirect to login page
-          navigate('/authentication/sign-in', { replace: true });
+          // navigate("/authentication/sign-in", { replace: true });
         }
       } catch (error) {
         console.log(error);
       }
-    }
-    if (isAuthenticatedOnLoad)
-      getUserInfo();
+    };
+    if (isAuthenticatedOnLoad) getUserInfo();
     else {
-      navigate('/authentication/sign-in', { replace: true });
+      // navigate("/authentication/sign-in", { replace: true });
     }
-
   }, []);
 
   // Setting page scroll to 0 when changing the route
@@ -146,10 +153,24 @@ export default function App() {
       if (route.collapse) {
         return getRoutes(route.collapse);
       }
-      if (pathname == 'dashboard' && !isAuthenticated)
-        return  <Route exact path="/authenticate/sign-in" element={route.component} key={route.key} />;
+      if (pathname == "dashboard" && !isAuthenticated)
+        return (
+          <Route
+            exact
+            path="/authenticate/sign-in"
+            element={route.component}
+            key={route.key}
+          />
+        );
       if (route.route) {
-        return <Route exact path={route.route} element={route.component} key={route.key} />;
+        return (
+          <Route
+            exact
+            path={route.route}
+            element={route.component}
+            key={route.key}
+          />
+        );
       }
 
       return null;
@@ -181,14 +202,13 @@ export default function App() {
 
   return direction === "rtl" ? (
     <UserProvider>
-    <CacheProvider value={rtlCache}>
-
-      <ThemeProvider theme={darkMode ? themeDarkRTL : themeRTL}>
-        <CssBaseline />
-        {layout === "dashboard" && (
-          <>
-            <SideBar/>
-            {/* <Sidenav
+      <CacheProvider value={rtlCache}>
+        <ThemeProvider theme={darkMode ? themeDarkRTL : themeRTL}>
+          <CssBaseline />
+          {layout === "dashboard" && (
+            <>
+              {isAuthenticated && <SideBar />}
+              {/* <Sidenav
               color={sidenavColor}
               brand={(transparentSidenav && !darkMode) || whiteSidenav ? logo : logo}
               brandName="Material Dashboard 2"
@@ -196,26 +216,26 @@ export default function App() {
               onMouseEnter={handleOnMouseEnter}
               onMouseLeave={handleOnMouseLeave}
             /> */}
-            <Configurator />
-            {configsButton}
-          </>
-        )}
-        {layout === "vr" && <Configurator />}
-        <Routes>
-          {getRoutes(routes)}
-          <Route path="*" element={<Navigate to="/dashboard" />} />
-        </Routes>
-      </ThemeProvider>
-    </CacheProvider>
+              <Configurator />
+              {configsButton}
+            </>
+          )}
+          {layout === "vr" && <Configurator />}
+          <Routes>
+            {getRoutes(routes)}
+            <Route path="*" element={<Navigate to="/dashboard" />} />
+          </Routes>
+        </ThemeProvider>
+      </CacheProvider>
     </UserProvider>
   ) : (
     <UserProvider>
-    <ThemeProvider theme={darkMode ? themeDark : theme}>
-      <CssBaseline />
-      {layout === "dashboard" && (
-        <>
-          <SideBar/>
-          {/* <Sidenav
+      <ThemeProvider theme={darkMode ? themeDark : theme}>
+        <CssBaseline />
+        {layout === "dashboard" && (
+          <>
+            {isAuthenticated && <SideBar />}
+            {/* <Sidenav
             color={sidenavColor}
             brand={(transparentSidenav && !darkMode) || whiteSidenav ? logo : logo}
             brandName="OWL"
@@ -223,20 +243,22 @@ export default function App() {
             onMouseEnter={handleOnMouseEnter}
             onMouseLeave={handleOnMouseLeave}
           /> */}
-          <Configurator />
-          {configsButton}
-        </>
-      )}
-      <GoogleOAuthProvider  clientId={"168695853654-m6c1h94875d8ob68ag78v9g1ngpnefjj.apps.googleusercontent.com"} >
-      {layout === "vr" && <Configurator />}
-      <Routes>
-
-        {getRoutes(routes)}
-        <Route path="*" element={<Navigate to="/dashboard" />} />
-      </Routes>
-      </GoogleOAuthProvider>
-
+            <Configurator />
+            {configsButton}
+          </>
+        )}
+        <GoogleOAuthProvider
+          clientId={
+            "168695853654-m6c1h94875d8ob68ag78v9g1ngpnefjj.apps.googleusercontent.com"
+          }
+        >
+          {layout === "vr" && <Configurator />}
+          <Routes>
+            {getRoutes(routes)}
+            <Route path="*" element={<Navigate to="/dashboard" />} />
+          </Routes>
+        </GoogleOAuthProvider>
       </ThemeProvider>
-      </UserProvider>
+    </UserProvider>
   );
 }

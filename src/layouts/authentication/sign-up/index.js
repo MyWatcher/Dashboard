@@ -6,9 +6,9 @@ import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 import MDInput from "components/MDInput";
 import MDButton from "components/MDButton";
-import styled from 'styled-components';
+import styled from "styled-components";
 import BasicLayout from "layouts/authentication/components/BasicLayout";
-import backgroundImage from "assets/images/background-signin-signup.jpg"
+import backgroundImage from "assets/images/background-signin-signup.jpg";
 
 function Cover() {
   const [formData, setFormData] = useState({
@@ -51,24 +51,20 @@ function Cover() {
       email: formData.email,
       firstName: formData.firstName,
       gender: formData.gender.toLowerCase(),
-      height : 0,
+      height: 0,
       lastName: formData.lastName,
-      password : formData.password,
-      weight : 0
-    }
+      password: formData.password,
+      weight: 0,
+    };
 
     try {
-      const response = await axios.post(
-        "/api/api/auth/register",
-        requestBody,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await axios.post("/api/api/auth/register", requestBody, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       setSuccess(response.data.message);
-      window.location.href = "/authentication/sign-in?justRegistered=true"
+      // window.location.href = "/authentication/sign-in?justRegistered=true"
       if (response.status === 200) {
         console.log("Registration successful!");
       } else {
@@ -99,85 +95,106 @@ function Cover() {
           onChange={handleInputChange}
         />
         <StyledInput
-        type="text"
-        name="lastName"
-        placeholder="Last Name"
-        value={formData.lastName}
-        onChange={handleInputChange}
+          type="text"
+          name="lastName"
+          placeholder="Last Name"
+          value={formData.lastName}
+          onChange={handleInputChange}
         />
-        <select id="gender" name="gender" disabled={!genderList.length}
+        <select
+          id="gender"
+          name="gender"
+          disabled={!genderList.length}
           value={formData.gender}
-            onChange={(e) => {
-              const updatedFormData = {
-                ...formData,
-                gender : e.target.value
-              };
-              setFormData(updatedFormData);
-              }}
-            style={{ width: "100%", padding: "8px", marginBottom: "8px", background: "#FFFFFF"}}>
-            <option defaultValue={"Men"} value="" disabled hidden={formData.gender !== ""}>Gender</option>
-            {genderList.length > 0 && genderList.map((gender, index) => (
-            <option key={index} value={gender}>{gender}</option>
-        ))}
+          onChange={(e) => {
+            const updatedFormData = {
+              ...formData,
+              gender: e.target.value,
+            };
+            setFormData(updatedFormData);
+          }}
+          style={{
+            width: "100%",
+            padding: "8px",
+            marginBottom: "8px",
+            background: "#FFFFFF",
+          }}
+        >
+          <option
+            defaultValue={"Men"}
+            value=""
+            disabled
+            hidden={formData.gender !== ""}
+          >
+            Gender
+          </option>
+          {genderList.length > 0 &&
+            genderList.map((gender, index) => (
+              <option key={index} value={gender}>
+                {gender}
+              </option>
+            ))}
         </select>
         <StyledInput
-        type="text"
-        name="email"
-        placeholder="Email"
-        value={formData.email}
-        onChange={handleInputChange}
+          type="text"
+          name="email"
+          placeholder="Email"
+          value={formData.email}
+          onChange={handleInputChange}
         />
         <StyledInput
-        type="password"
-        name="password"
-        placeholder="Password"
-        value={formData.password}
-        onChange={handleInputChange}
+          type="password"
+          name="password"
+          placeholder="Password"
+          value={formData.password}
+          onChange={handleInputChange}
         />
         <StyledInput
-        type="password"
-        name="confirmPassword"
-        placeholder="Confirm Password"
-        value={formData.confirmPassword}
-        onChange={handleInputChange}
+          type="password"
+          name="confirmPassword"
+          placeholder="Confirm Password"
+          value={formData.confirmPassword}
+          onChange={handleInputChange}
         />
         {success && (
-              <span
-                style={{
-                  width: "100%",
-                  display: "inline-block",
-                  borderRadius: "0.75rem",
-                  padding: "0.25rem",
-                  backgroundColor: "green",
-                  color: "white",
-                  textAlign: "center",
-                  fontSize: "1.25rem",
-                  marginBottom: 16,
-                }}
-              >
-                {success}
-              </span>
-            )}
-            {error && (
-              <span
-                style={{
-                  width: "100%",
-                  display: "inline-block",
-                  borderRadius: "0.75rem",
-                  padding: "0.25rem",
-                  backgroundColor: "red",
-                  color: "white",
-                  textAlign: "center",
-                  fontSize: "1.25rem",
-                  marginBottom: 16,
-                }}
-              >
-                {error}
-              </span>
-            )}
+          <span
+            style={{
+              width: "100%",
+              display: "inline-block",
+              borderRadius: "0.75rem",
+              padding: "0.25rem",
+              backgroundColor: "green",
+              color: "white",
+              textAlign: "center",
+              fontSize: "1.25rem",
+              marginBottom: 16,
+            }}
+          >
+            {success}
+          </span>
+        )}
+        {error && (
+          <span
+            style={{
+              width: "100%",
+              display: "inline-block",
+              borderRadius: "0.75rem",
+              padding: "0.25rem",
+              backgroundColor: "red",
+              color: "white",
+              textAlign: "center",
+              fontSize: "1.25rem",
+              marginBottom: 16,
+            }}
+          >
+            {error}
+          </span>
+        )}
         <SignUpButton onClick={handleRegistration}>Sign Up</SignUpButton>
         <Text>
-          <RegisterLink href="/register">Return to Login</RegisterLink>
+          <RegisterLink href="/authentication/sign-in">
+            Return to Login
+          </RegisterLink>
         </Text>
       </LoginBox>
     </Container>
@@ -203,7 +220,7 @@ const Background = styled.img`
 `;
 
 const LoginBox = styled.div`
-  background: #031C30;
+  background: #031c30;
   padding: 40px;
   border-radius: 30px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -240,8 +257,8 @@ const SignUpButton = styled.button`
   width: 100%;
   padding: 10px;
   margin-bottom: 20px;
-  background-color: #FFDE59;
-  color: #031C30;
+  background-color: #ffde59;
+  color: #031c30;
   border: none;
   border-radius: 5px;
   font-size: 16px;
@@ -259,6 +276,6 @@ const Text = styled.p`
 `;
 
 const RegisterLink = styled.a`
-  color: #FFDE59;
+  color: #ffde59;
   text-decoration: none;
 `;
