@@ -5,7 +5,7 @@
 /api/api/auth/confirm-delete-account/_ http://20.199.106.94/api/auth/confirm-delete-account/_ 200
 
 /api/api/user/account http://20.199.106.94/api/user/account 200
-/api/api/user/account/email http://20.199.106.94/api/account/email 200
+/api/api/user/account/email http://20.199.106.94/api/user/account/email 200
 
 /api/api/subscriptions/getSubscription http://20.199.106.94/api/subscriptions/getSubscription 200
 
