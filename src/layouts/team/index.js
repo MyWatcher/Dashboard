@@ -25,6 +25,7 @@ import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
+import ErrorHandler from "../ErrorHandling/ErrorHandling";
 
 function TeamList({ teams, handleDeleteTeam }) {
   const [open, setOpen] = React.useState(null);
@@ -82,6 +83,7 @@ function TeamPage() {
   const [open, setOpen] = useState(false);
   const [teamName, setTeamName] = useState("");
   const [teamDescription, setTeamDescription] = useState("");
+  const [error, setError] = useState("");
 
   useEffect(() => {
     fetchTeams();
@@ -129,6 +131,11 @@ function TeamPage() {
       handleClose();
     } catch (error) {
       console.error(error);
+      const errorMessage = "Duplicate team's name";
+      setError(errorMessage);
+      setTimeout(() => {
+        setError("");
+      }, 5000);
     }
   };
 
@@ -182,6 +189,25 @@ function TeamPage() {
                 onChange={(e) => setTeamDescription(e.target.value)}
               />
             </DialogContent>
+            {error && (
+              <span
+                style={{
+                  width: "90%",
+                  display: "inline-block",
+                  borderRadius: "0.75rem",
+                  padding: "0.25rem",
+                  backgroundColor: "red",
+                  color: "white",
+                  textAlign: "center",
+                  fontSize: "1.25rem",
+                  marginBottom: 16,
+                  marginLeft: "5%",
+                }}
+              >
+                {error}
+                <ErrorHandler message={error} />
+              </span>
+            )}
             <DialogActions>
               <Button onClick={handleClose}>Cancel</Button>
               <Button onClick={handleCreateTeam}>Create</Button>
