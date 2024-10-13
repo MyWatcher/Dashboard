@@ -96,7 +96,7 @@ function TeamReports({ team }) {
           <div>
             <h4 style={{ marginTop: 10, marginBottom: 10 }}>{member.email}</h4>
             {reports
-              .filter((report) => report.user._id !== member._id)
+              .filter((report) => report.user._id === member._id)
               .map((report) => (
                 <div
                   style={{
