@@ -98,12 +98,15 @@ function Footer({ company, links }) {
 
 // Setting default values for the props of Footer
 Footer.defaultProps = {
-  company: { href: "http://35.180.167.90:3000/dashboard", name: "OWL Team" },
+  company: {
+    href: "mailto:delgadopierrealexandre@gmail.com",
+    name: "OWL Team",
+  },
   links: [
-    { href: "http://35.180.167.90:3000/dashboard", name: "OWL Team" },
-    { href: "http://35.180.167.90:3000/dashboard", name: "About Us" },
-    { href: "http://35.180.167.90:3000/dashboard", name: "Blog" },
-    { href: "http://35.180.167.90:3000/dashboard", name: "License" },
+    { href: "mailto:delgadopierrealexandre@gmail.com", name: "OWL Team" },
+    // { href: "http://35.180.167.90:3000/dashboard", name: "About Us" },
+    // { href: "http://35.180.167.90:3000/dashboard", name: "Blog" },
+    // { href: "http://35.180.167.90:3000/dashboard", name: "License" },
   ],
 };
 

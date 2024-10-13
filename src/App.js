@@ -99,7 +99,9 @@ export default function App() {
   };
   const navigate = useNavigate();
   // auth redirect to login
-  const isAuthenticated = !!localStorage.getItem("authToken");
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    !!localStorage.getItem("authToken")
+  );
   // Change the openConfigurator state
   const handleConfiguratorOpen = () =>
     setOpenConfigurator(dispatch, !openConfigurator);
@@ -137,6 +139,8 @@ export default function App() {
         }
       } catch (error) {
         console.log(error);
+        setIsAuthenticated(false);
+        navigate("/authentication/sign-in", { replace: true });
       }
     };
     if (isAuthenticatedOnLoad) getUserInfo();
@@ -221,7 +225,7 @@ export default function App() {
               onMouseLeave={handleOnMouseLeave}
             /> */}
               <Configurator />
-              {configsButton}
+              {/*{configsButton}*/}
             </>
           )}
           {layout === "vr" && <Configurator />}
@@ -248,7 +252,7 @@ export default function App() {
             onMouseLeave={handleOnMouseLeave}
           /> */}
             <Configurator />
-            {configsButton}
+            {/*{configsButton}*/}
           </>
         )}
         <GoogleOAuthProvider

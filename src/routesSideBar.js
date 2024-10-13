@@ -14,14 +14,14 @@ const routesSideBar = [
     route: "/dashboard",
     component: <Dashboard />,
   },
-  {
-    type: "collapse",
-    name: "Document",
-    key: "Document",
-    icon: <Icon fontSize="small">article</Icon>,
-    route: "/document",
-    component: <Dashboard />,
-  },
+  // {
+  //   type: "collapse",
+  //   name: "Document",
+  //   key: "Document",
+  //   icon: <Icon fontSize="small">article</Icon>,
+  //   route: "/document",
+  //   component: <Dashboard />,
+  // },
   {
     type: "collapse",
     name: "Profile",
