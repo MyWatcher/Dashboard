@@ -12,6 +12,7 @@
 /api/api/team/getMyTeams http://20.199.106.94/api/team/getMyTeams 200
 /api/api/team/createTeam http://20.199.106.94/api/team/createTeam 201
 /api/api/team/deleteTeam/* http://20.199.106.94/api/team/deleteTeam/:splat 200
+/api/api/team/addUserToTeam http://20.199.106.94/api/team/addUserToTeam 201
 
 /api/api/report/road http://20.199.106.94/api/report/road 200
 
