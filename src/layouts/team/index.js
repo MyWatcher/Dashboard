@@ -68,7 +68,6 @@ function TeamReports({ team }) {
         },
       };
       const res = await axios.get("/api/api/report/road", config);
-      console.log(res.data.data);
       setReports(res.data.data);
     } catch (error) {
       throw error.response?.data?.error || "An error occurred.";

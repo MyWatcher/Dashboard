@@ -76,27 +76,47 @@ function Dashboard() {
     <DashboardLayout>
       <DashboardNavbar />
       <MDBox py={3}>
-        <h1>OWL Dashboard</h1>
-        <div>
+        <h1 style={{ textAlign: "center" }}>OWL Dashboard</h1>
+        <div
+          style={{
+            background: "white",
+            borderRadius: 10,
+            padding: "2rem",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
           <p>
             this is the OWL dashboard, a tool to visualize your account on your
             computer and handle teams on it
           </p>
-          <h2>Profile</h2>
+          <h2 style={{ textAlign: "center" }}>Profile</h2>
           <p>For your profile, you can access the following data:</p>
-          <ul>
-            <li>Full name</li>
-            <li>Email</li>
-            <li>Current subscription</li>
-            <li>Tokens</li>
+          <ul
+            style={{
+              marginLeft: "5rem",
+              marginBottom: "1rem",
+              fontWeight: "bold",
+            }}
+          >
+            <div>Full name</div>
+            <div>Email</div>
+            <div>Current subscription</div>
+            <div>Tokens</div>
           </ul>
           <p>And do the following actions:</p>
-          <ul>
-            <li>Change your email</li>
-            <li>Change your password</li>
-            <li>Delete your account</li>
+          <ul
+            style={{
+              marginLeft: "5rem",
+              marginBottom: "1rem",
+              fontWeight: "bold",
+            }}
+          >
+            <div>Change your email</div>
+            <div>Change your password</div>
+            <div>Delete your account</div>
           </ul>
-          <h2>Team</h2>
+          <h2 style={{ textAlign: "center" }}>Team</h2>
           <p>
             For the teams, you can see all your teams, create team, invite
             member to your team and if your the team admnistrator, you can see
