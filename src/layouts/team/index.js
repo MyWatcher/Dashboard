@@ -78,6 +78,16 @@ function TeamReports({ team }) {
     retrieveMonthlyReports();
   }, []);
 
+  function formatMinutesAndSeconds(time) {
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.round(time % 60);
+    return `${minutes}min ${seconds}sec`;
+  }
+
+  function metersToKilometers(meters) {
+    return meters / 1000;
+  }
+
   return (
     <Box sx={style}>
       <Typography id="modal-modal-title" variant="h6" component="h2">
@@ -108,7 +118,7 @@ function TeamReports({ team }) {
                     date: {formatDate(report.startDate)}
                   </p>
                   <p style={{ whiteSpace: "nowrap" }}>
-                    average bpm: {report.averageBpm}
+                    average bpm: {(report.maxBpm + report.minBpm) / 2}
                   </p>
                   <p style={{ whiteSpace: "nowrap" }}>
                     min bpm: {report.minBpm}
@@ -117,16 +127,19 @@ function TeamReports({ team }) {
                     max bpm: {report.maxBpm}
                   </p>
                   <p style={{ whiteSpace: "nowrap" }}>
-                    average km: {report.averageBpm}
+                    average km: {metersToKilometers(report.averageKm)}
                   </p>
                   <p style={{ whiteSpace: "nowrap" }}>
-                    total driving time: {report.totalDrivingTime}
+                    total driving time:{" "}
+                    {formatMinutesAndSeconds(report.totalDrivingTime)}
                   </p>
                   <p style={{ whiteSpace: "nowrap" }}>
-                    total drowsiness: {report.totalDrowsiness}
+                    total drowsiness:{" "}
+                    {formatMinutesAndSeconds(report.totalDrowsiness)}
                   </p>
                   <p style={{ whiteSpace: "nowrap" }}>
-                    total near drowsiness time: {report.totalNearDrowsinessTime}
+                    total near drowsiness time:{" "}
+                    {formatMinutesAndSeconds(report.totalNearDrowsinessTime)}
                   </p>
                   <p style={{ whiteSpace: "nowrap" }}>
                     trip count: {report.tripCount}
